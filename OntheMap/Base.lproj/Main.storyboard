@@ -57,13 +57,19 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lZX-kE-Jf4">
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHk-yy-jUp">
-                                        <state key="normal" title="Login"/>
+                                        <color key="backgroundColor" red="0.1239108281" green="0.59454438519999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rs2-06-adY">
-                                        <state key="normal" title="Do not have Account? Signup"/>
+                                        <color key="backgroundColor" red="0.1239108281" green="0.59454438519999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Do not have Account? Signup">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -74,17 +80,25 @@
                                     <constraint firstItem="aJx-b6-bpw" firstAttribute="width" secondItem="rs2-06-adY" secondAttribute="width" id="tOb-aj-Tuy"/>
                                 </constraints>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity_icon" translatesAutoresizingMaskIntoConstraints="NO" id="9jK-w2-2Ll">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="sY8-fg-jmO"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="2Sm-S7-iBH" firstAttribute="leading" secondItem="9jK-w2-2Ll" secondAttribute="leading" id="CvI-3h-taU"/>
                             <constraint firstItem="2Sm-S7-iBH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="L4f-C2-vKB"/>
+                            <constraint firstItem="2Sm-S7-iBH" firstAttribute="trailing" secondItem="9jK-w2-2Ll" secondAttribute="trailing" id="QjV-FJ-DNk"/>
                             <constraint firstItem="2Sm-S7-iBH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TWW-4r-yed"/>
+                            <constraint firstItem="2Sm-S7-iBH" firstAttribute="top" secondItem="9jK-w2-2Ll" secondAttribute="bottom" constant="8" symbolic="YES" id="ZWP-KP-1xm"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
+            <point key="canvasLocation" x="31.884057971014496" y="37.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YOc-RM-iKT">
@@ -160,4 +174,7 @@
             <point key="canvasLocation" x="694" y="869"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="udacity_icon" width="2400" height="1260"/>
+    </resources>
 </document>
