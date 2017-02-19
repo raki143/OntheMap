@@ -130,6 +130,24 @@
             </objects>
             <point key="canvasLocation" x="31.884057971014496" y="37.5"/>
         </scene>
+        <!--Sign Up View Controller-->
+        <scene sceneID="c0W-eb-RFC">
+            <objects>
+                <viewController storyboardIdentifier="SignUpViewController" id="Pd0-9c-HMP" customClass="SignUpViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZfH-9C-y67"/>
+                        <viewControllerLayoutGuide type="bottom" id="icj-pX-Bc2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nQc-Tx-SBU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6uZ-wI-4GX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="984" y="38"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="YOc-RM-iKT">
             <objects>

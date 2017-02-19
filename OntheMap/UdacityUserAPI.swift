@@ -24,7 +24,7 @@ class UdacityUserAPI: NSObject {
     
     func signInWithUdacityCredentials(userName:String, password:String,completionHandler handler:RequestCompletionHandler?){
         
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        let request = NSMutableURLRequest(url: URL(string: urlString.signIn)!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
