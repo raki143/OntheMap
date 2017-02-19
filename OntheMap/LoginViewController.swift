@@ -9,17 +9,18 @@
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate{
-
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     var selectedTextField : UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyBoardNotificatin()
@@ -73,14 +74,72 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
-
+    
     //MARK: - LOGIN Action
     @IBAction func login(_ sender: AnyObject) {
         
+        guard let email = emailTextField.text, let password = passwordTextField.text else{
+            return
+        }
+        
+        UdacityUserAPI.sharedInstance().signInWithUdacityCredentials(userName: email, password: password) { (data, response, error) in
+            
+            if let response = response as? HTTPURLResponse{
+                if response.statusCode < 200 || response.statusCode > 300{
+                    self.createAlertMessage(title: "Alert", message: "Incorrect Username or Password. Please enter correct credentials.")
+                    return
+                }
+            }
+            
+            if let error = error{
+                if error.code == NSURLErrorNotConnectedToInternet{
+                    self.createAlertMessage(title: "Alert", message: "Seems like you don't have an internet connection")
+                    return
+                }
+            }else{
+                do{
+                    let jsonData = try JSONSerialization.jsonObject(with:data!, options:.allowFragments) as? [String:AnyObject]
+                    
+                    if let account = jsonData?["account"] as? [String:AnyObject]{
+                        
+                        UdacityStudent.uniqueKey = account["key"] as! String
+                        
+                        // present tab bar controller
+                        DispatchQueue.main.async {
+                            if let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarNavigationController"){
+                                self.present(tabBarController, animated: true, completion: nil)
+                            }
+                        }
+                        
+                    }else{
+                        
+                        self.createAlertMessage(title: "Alert", message: "Incorrect Username or Password. Please enter correct credentials.")
+                        return
+                        
+                    }
+                }catch{
+                    print("the json data could not be obtained")
+                    
+                }
+                
+            }
+            
+        }
     }
     
-
+    
     @IBAction func signUp(_ sender: AnyObject) {
+    }
+    
+    // Mark: - Alert Methods
+    func createAlertMessage(title:String,message:String){
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        DispatchQueue.main.async(execute: {
+            
+            self.present(alert, animated: true, completion: nil)
+        })
     }
 }
 

@@ -12,6 +12,8 @@
 		7EA525C61E508D6E00DB657E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA525C41E508D6E00DB657E /* Main.storyboard */; };
 		7EA525C81E508D6E00DB657E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA525C71E508D6E00DB657E /* Assets.xcassets */; };
 		7EA525CB1E508D6E00DB657E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA525C91E508D6E00DB657E /* LaunchScreen.storyboard */; };
+		7EA525D31E59977F00DB657E /* UdacityUserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525D21E59977F00DB657E /* UdacityUserAPI.swift */; };
+		7EA525D51E59CD1B00DB657E /* UdacityStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525D41E59CD1B00DB657E /* UdacityStudent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		7EA525C71E508D6E00DB657E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EA525CA1E508D6E00DB657E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EA525CC1E508D6E00DB657E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EA525D21E59977F00DB657E /* UdacityUserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityUserAPI.swift; sourceTree = "<group>"; };
+		7EA525D41E59CD1B00DB657E /* UdacityStudent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityStudent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +60,12 @@
 			children = (
 				7EA525C01E508D6E00DB657E /* AppDelegate.swift */,
 				7EA525C21E508D6E00DB657E /* LoginViewController.swift */,
+				7EA525D21E59977F00DB657E /* UdacityUserAPI.swift */,
 				7EA525C41E508D6E00DB657E /* Main.storyboard */,
 				7EA525C71E508D6E00DB657E /* Assets.xcassets */,
 				7EA525C91E508D6E00DB657E /* LaunchScreen.storyboard */,
 				7EA525CC1E508D6E00DB657E /* Info.plist */,
+				7EA525D41E59CD1B00DB657E /* UdacityStudent.swift */,
 			);
 			path = OntheMap;
 			sourceTree = "<group>";
@@ -137,7 +143,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EA525C31E508D6E00DB657E /* LoginViewController.swift in Sources */,
+				7EA525D51E59CD1B00DB657E /* UdacityStudent.swift in Sources */,
 				7EA525C11E508D6E00DB657E /* AppDelegate.swift in Sources */,
+				7EA525D31E59977F00DB657E /* UdacityUserAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

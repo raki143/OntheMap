@@ -133,7 +133,7 @@
         <!--Navigation Controller-->
         <scene sceneID="YOc-RM-iKT">
             <objects>
-                <navigationController id="ZHW-z2-bh8" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TabBarNavigationController" id="ZHW-z2-bh8" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Iuo-jD-8qX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
