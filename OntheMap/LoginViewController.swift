@@ -75,14 +75,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
     
     
-    //MARK: - LOGIN Action
+    //MARK: - Login Action
     @IBAction func login(_ sender: AnyObject) {
         
         guard let email = emailTextField.text, let password = passwordTextField.text else{
             return
         }
         
+        if email.isEmpty || password.isEmpty{
+            self.createAlertMessage(title: "Alert", message: "Please enter valid credentials.")
+            return
+        }
+        let activityIndicator = showActivityIndicator()
         UdacityUserAPI.sharedInstance().signInWithUdacityCredentials(userName: email, password: password) { (data, response, error) in
+            
+            activityIndicator.hide()
             
             if let response = response as? HTTPURLResponse{
                 if response.statusCode < 200 || response.statusCode > 300{
@@ -127,11 +134,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
-    
+   //MARK: - Signup Action
     @IBAction func signUp(_ sender: AnyObject) {
     }
     
-    // Mark: - Alert Methods
+    //MARK: - Alert Methods
     func createAlertMessage(title:String,message:String){
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -140,6 +147,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
             
             self.present(alert, animated: true, completion: nil)
         })
+    }
+    
+    //MARK: - Activity Indicator Method
+    func showActivityIndicator() -> UIActivityIndicatorView{
+        
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        DispatchQueue.main.async {
+            activityIndicator.center = self.view.center
+            activityIndicator.color = UIColor.black
+            self.view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+        }
+        return activityIndicator
+    }
+}
+
+extension UIActivityIndicatorView{
+    func hide(){
+        DispatchQueue.main.async {
+            self.stopAnimating()
+            self.removeFromSuperview()
+        }
     }
 }
 
