@@ -81,7 +81,7 @@ class UdacityUserAPI: NSObject {
     
     func getPublicUserData(completionHandler handler:RequestCompletionHandler?){
       
-        let request = NSMutableURLRequest(url: URL(string: URLString.userInfo+UdacityStudent.uniqueKey)!)
+        let request = NSMutableURLRequest(url: URL(string: URLString.userInfo+UdacityUser.uniqueKey)!)
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
@@ -107,8 +107,8 @@ class UdacityUserAPI: NSObject {
                     
                     if let userDict = jsonData["user"] as? [String:AnyObject]{
                         
-                        UdacityStudent.firstName = userDict["first_name"] as! String
-                        UdacityStudent.lastName = userDict["last_name"] as! String
+                        UdacityUser.firstName = userDict["first_name"] as! String
+                        UdacityUser.lastName = userDict["last_name"] as! String
                     }
 
                 }

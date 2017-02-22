@@ -111,7 +111,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                     
                     if let account = jsonData?["account"] as? [String:AnyObject]{
                         
-                        UdacityStudent.uniqueKey = account["key"] as! String
+                        UdacityUser.uniqueKey = account["key"] as! String
                         
                         // present tab bar controller
                         DispatchQueue.main.async {

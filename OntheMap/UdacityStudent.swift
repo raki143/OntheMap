@@ -1,5 +1,5 @@
 //
-//  UdacityStudent.swift
+//  UdacityUser.swift
 //  OntheMap
 //
 //  Created by Rakesh Kumar on 19/02/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UdacityStudent{
+struct UdacityUser{
     //Initialized to empty strings to ease parsing through data.
     static var firstName: String = ""
     static var lastName: String = ""
