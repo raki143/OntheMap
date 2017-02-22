@@ -102,6 +102,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 if error.code == NSURLErrorNotConnectedToInternet{
                     self.createAlertMessage(title: "Alert", message: "Seems like you don't have an internet connection")
                     return
+                }else{
+                    self.createAlertMessage(title: "Alert", message: "Please try again.")
                 }
             }else{
                 do{
@@ -140,17 +142,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         UIApplication.shared.openURL(URL(string: urlString.signUp)!)
     }
     
-    //MARK: - Alert Methods
-    func createAlertMessage(title:String,message:String){
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        DispatchQueue.main.async(execute: {
-            
-            self.present(alert, animated: true, completion: nil)
-        })
-    }
-    
     //MARK: - Activity Indicator Method
     func showActivityIndicator() -> UIActivityIndicatorView{
         
@@ -165,12 +157,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
 }
 
-extension UIActivityIndicatorView{
-    func hide(){
-        DispatchQueue.main.async {
-            self.stopAnimating()
-            self.removeFromSuperview()
-        }
-    }
-}
+
 

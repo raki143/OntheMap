@@ -14,7 +14,8 @@ struct urlString {
     static let signUp = "https://www.udacity.com/account/auth#!/signup"
     static let signIn = "https://www.udacity.com/api/session"
     static let logout = "https://www.udacity.com/api/session"
-    static let studentLocation = "https://parse.udacity.com/parse/classes/StudentLocation"
+    static let studentLocations = "https://parse.udacity.com/parse/classes/StudentLocation"
+    static let userInfo = "https://www.udacity.com/api/users/"
 }
 
 
@@ -23,4 +24,13 @@ struct values{
     
     static let parseAppID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
     static let APIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+    
 }
+
+struct keys{
+    
+    static let parseAppID = "X-Parse-Application-Id"
+    static let APIKey = "X-Parse-REST-API-Key"
+    
+}
+

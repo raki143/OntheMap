@@ -16,6 +16,7 @@
 		7EA525D31E59977F00DB657E /* UdacityUserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525D21E59977F00DB657E /* UdacityUserAPI.swift */; };
 		7EA525D51E59CD1B00DB657E /* UdacityStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525D41E59CD1B00DB657E /* UdacityStudent.swift */; };
 		7EA525D71E59D93700DB657E /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525D61E59D93700DB657E /* constants.swift */; };
+		7EA525D91E5DF85E00DB657E /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525D81E5DF85E00DB657E /* UIViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7EA525D21E59977F00DB657E /* UdacityUserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityUserAPI.swift; sourceTree = "<group>"; };
 		7EA525D41E59CD1B00DB657E /* UdacityStudent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityStudent.swift; sourceTree = "<group>"; };
 		7EA525D61E59D93700DB657E /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		7EA525D81E5DF85E00DB657E /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +50,7 @@
 			children = (
 				7EA525C21E508D6E00DB657E /* LoginViewController.swift */,
 				148821551E5DA41A00DB9355 /* TabBarController.swift */,
+				7EA525D81E5DF85E00DB657E /* UIViewControllerExtension.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				7EA525C11E508D6E00DB657E /* AppDelegate.swift in Sources */,
 				148821561E5DA41A00DB9355 /* TabBarController.swift in Sources */,
 				7EA525D71E59D93700DB657E /* constants.swift in Sources */,
+				7EA525D91E5DF85E00DB657E /* UIViewControllerExtension.swift in Sources */,
 				7EA525D31E59977F00DB657E /* UdacityUserAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

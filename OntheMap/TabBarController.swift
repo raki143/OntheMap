@@ -13,19 +13,28 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UdacityUserAPI.sharedInstance().getPublicUserData { (data, response, error) in
-            
-            if let error = error{
-                print(error.description)
-            }
-            
-        }
+        
         
     }
 
     
-    
+    func getUserData(){
+        
+        UdacityUserAPI.sharedInstance().getPublicUserData { (data, response, error) in
+            
+            if let error = error{
+                self.createAlertMessage(title: "Error", message: error.description)
+            }
+            
+        }
 
+    }
+
+    func getStudentLocations(){
+        
+        UdacityUserAPI.sharedInstance().getStudentLocations()
+        
+    }
     
 
 }

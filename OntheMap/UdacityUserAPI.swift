@@ -81,7 +81,7 @@ class UdacityUserAPI: NSObject {
     
     func getPublicUserData(completionHandler handler:RequestCompletionHandler?){
       
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/\(UdacityStudent.uniqueKey)")!)
+        let request = NSMutableURLRequest(url: URL(string: urlString.userInfo+UdacityStudent.uniqueKey)!)
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
@@ -122,5 +122,30 @@ class UdacityUserAPI: NSObject {
         }
         task.resume()
         
+    }
+    
+    func getStudentLocations(){
+        
+        let url = URL(string: urlString.studentLocations)
+        var urlComponents = URLComponents(string: url!.absoluteString)
+        
+        urlComponents?.queryItems = [URLQueryItem(name: "limit", value: "100"), URLQueryItem(name: "order", value: "-updatedAt")]
+        
+        guard let urlWithParam = urlComponents?.url else {
+            return
+        }
+
+        let request = NSMutableURLRequest(url: urlWithParam)
+        request.addValue(values.parseAppID, forHTTPHeaderField: keys.parseAppID)
+        request.addValue(values.APIKey, forHTTPHeaderField: keys.APIKey)
+        
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            if error != nil { // Handle error...
+                return
+            }
+            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
+        }
+        task.resume()
+
     }
 }
