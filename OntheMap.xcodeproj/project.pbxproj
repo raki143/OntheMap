@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		148821561E5DA41A00DB9355 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148821551E5DA41A00DB9355 /* TabBarController.swift */; };
 		7EA525C11E508D6E00DB657E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525C01E508D6E00DB657E /* AppDelegate.swift */; };
 		7EA525C31E508D6E00DB657E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525C21E508D6E00DB657E /* LoginViewController.swift */; };
 		7EA525C61E508D6E00DB657E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA525C41E508D6E00DB657E /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		148821551E5DA41A00DB9355 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7EA525BD1E508D6E00DB657E /* OntheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OntheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA525C01E508D6E00DB657E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EA525C21E508D6E00DB657E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +43,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		148821581E5DB1D900DB9355 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7EA525C21E508D6E00DB657E /* LoginViewController.swift */,
+				148821551E5DA41A00DB9355 /* TabBarController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		148821591E5DB22A00DB9355 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7EA525D21E59977F00DB657E /* UdacityUserAPI.swift */,
+				7EA525D41E59CD1B00DB657E /* UdacityStudent.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		7EA525B41E508D6E00DB657E = {
 			isa = PBXGroup;
 			children = (
@@ -62,13 +82,12 @@
 			children = (
 				7EA525C01E508D6E00DB657E /* AppDelegate.swift */,
 				7EA525D61E59D93700DB657E /* constants.swift */,
-				7EA525C21E508D6E00DB657E /* LoginViewController.swift */,
-				7EA525D21E59977F00DB657E /* UdacityUserAPI.swift */,
+				148821581E5DB1D900DB9355 /* Controller */,
+				148821591E5DB22A00DB9355 /* Model */,
 				7EA525C41E508D6E00DB657E /* Main.storyboard */,
 				7EA525C71E508D6E00DB657E /* Assets.xcassets */,
 				7EA525C91E508D6E00DB657E /* LaunchScreen.storyboard */,
 				7EA525CC1E508D6E00DB657E /* Info.plist */,
-				7EA525D41E59CD1B00DB657E /* UdacityStudent.swift */,
 			);
 			path = OntheMap;
 			sourceTree = "<group>";
@@ -148,6 +167,7 @@
 				7EA525C31E508D6E00DB657E /* LoginViewController.swift in Sources */,
 				7EA525D51E59CD1B00DB657E /* UdacityStudent.swift in Sources */,
 				7EA525C11E508D6E00DB657E /* AppDelegate.swift in Sources */,
+				148821561E5DA41A00DB9355 /* TabBarController.swift in Sources */,
 				7EA525D71E59D93700DB657E /* constants.swift in Sources */,
 				7EA525D31E59977F00DB657E /* UdacityUserAPI.swift in Sources */,
 			);
