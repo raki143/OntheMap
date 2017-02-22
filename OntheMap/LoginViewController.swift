@@ -139,7 +139,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
    //MARK: - Signup Action
     @IBAction func signUp(_ sender: AnyObject) {
         _ = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
-        UIApplication.shared.openURL(URL(string: urlString.signUp)!)
+        UIApplication.shared.openURL(URL(string: URLString.signUp)!)
     }
     
         

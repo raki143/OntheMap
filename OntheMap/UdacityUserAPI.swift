@@ -25,7 +25,7 @@ class UdacityUserAPI: NSObject {
     
     func signInWithUdacityCredentials(userName:String, password:String,completionHandler handler:RequestCompletionHandler?){
         
-        let request = NSMutableURLRequest(url: URL(string: urlString.signIn)!)
+        let request = NSMutableURLRequest(url: URL(string: URLString.signIn)!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -57,7 +57,7 @@ class UdacityUserAPI: NSObject {
     
     func logout(){
         
-        let request = NSMutableURLRequest(url: URL(string: urlString.logout)!)
+        let request = NSMutableURLRequest(url: URL(string: URLString.logout)!)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared
@@ -81,7 +81,7 @@ class UdacityUserAPI: NSObject {
     
     func getPublicUserData(completionHandler handler:RequestCompletionHandler?){
       
-        let request = NSMutableURLRequest(url: URL(string: urlString.userInfo+UdacityStudent.uniqueKey)!)
+        let request = NSMutableURLRequest(url: URL(string: URLString.userInfo+UdacityStudent.uniqueKey)!)
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
@@ -126,7 +126,7 @@ class UdacityUserAPI: NSObject {
     
     func getStudentLocations(){
         
-        let url = URL(string: urlString.studentLocations)
+        let url = URL(string: URLString.studentLocations)
         var urlComponents = URLComponents(string: url!.absoluteString)
         
         urlComponents?.queryItems = [URLQueryItem(name: "limit", value: "100"), URLQueryItem(name: "order", value: "-updatedAt")]
@@ -136,8 +136,8 @@ class UdacityUserAPI: NSObject {
         }
 
         let request = NSMutableURLRequest(url: urlWithParam)
-        request.addValue(values.parseAppID, forHTTPHeaderField: keys.parseAppID)
-        request.addValue(values.APIKey, forHTTPHeaderField: keys.APIKey)
+        request.addValue(Values.parseAppID, forHTTPHeaderField: Keys.parseAppID)
+        request.addValue(Values.APIKey, forHTTPHeaderField: Keys.APIKey)
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             if error != nil { // Handle error...
