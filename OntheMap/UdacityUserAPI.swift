@@ -140,10 +140,34 @@ class UdacityUserAPI: NSObject {
         request.addValue(Values.APIKey, forHTTPHeaderField: Keys.APIKey)
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil { // Handle error...
+            
+            guard (error == nil) else {
+                // propagate this error using notification
                 return
             }
-            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                // propagate this error using notification
+                return
+            }
+            
+            guard let data = data else{
+                // propagate this error using notification
+                return
+            }
+            
+            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
+            
+            do{
+                if let jsonData = try  JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String:AnyObject]{
+                    if let studentArray = jsonData["results"] as? [[String:AnyObject]]{
+                        StudentInfoModel.getStudentList(fromStudents: studentArray)
+                    }
+                }
+
+            }catch let error{
+                print(error)
+            }
         }
         task.resume()
 

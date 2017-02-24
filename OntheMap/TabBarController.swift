@@ -13,10 +13,19 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout))
+        let reloadButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(getStudentLocations))
+        let pinButton = UIBarButtonItem(image: UIImage(named:"pin"), style: .plain, target: self, action: #selector(postUserInformation))
+        navigationItem.rightBarButtonItems = [pinButton,reloadButton]
         
-        
+        getUserData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // get other students data
+        getStudentLocations()
+    }
     
     func getUserData(){
         
@@ -36,5 +45,13 @@ class TabBarController: UITabBarController {
         
     }
     
+    func logout(){
+        UdacityUserAPI.sharedInstance().logout()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func postUserInformation(){
+        print("post user Info")
+    }
 
 }

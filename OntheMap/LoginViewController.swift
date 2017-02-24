@@ -29,6 +29,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyBoardNotification()
+        emailTextField.text = ""
+        passwordTextField.text = ""
     }
     
     // MARK: - KeyBoard Resigning and Notification
