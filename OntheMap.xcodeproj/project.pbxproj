@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		144B25241E6033F800E3DEF7 /* StudentInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144B25231E6033F800E3DEF7 /* StudentInfoModel.swift */; };
-		148821561E5DA41A00DB9355 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148821551E5DA41A00DB9355 /* TabBarController.swift */; };
 		7EA525C11E508D6E00DB657E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525C01E508D6E00DB657E /* AppDelegate.swift */; };
 		7EA525C31E508D6E00DB657E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525C21E508D6E00DB657E /* LoginViewController.swift */; };
 		7EA525C61E508D6E00DB657E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA525C41E508D6E00DB657E /* Main.storyboard */; };
@@ -26,7 +25,6 @@
 
 /* Begin PBXFileReference section */
 		144B25231E6033F800E3DEF7 /* StudentInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfoModel.swift; sourceTree = "<group>"; };
-		148821551E5DA41A00DB9355 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7EA525BD1E508D6E00DB657E /* OntheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OntheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA525C01E508D6E00DB657E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EA525C21E508D6E00DB657E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				7EA525C21E508D6E00DB657E /* LoginViewController.swift */,
-				148821551E5DA41A00DB9355 /* TabBarController.swift */,
 				7EA525D81E5DF85E00DB657E /* UIViewControllerExtension.swift */,
 				7EA525DC1E6086BC00DB657E /* MapViewController.swift */,
 				7EA525E11E60AE1200DB657E /* StudentsTableViewController.swift */,
@@ -198,7 +195,6 @@
 				144B25241E6033F800E3DEF7 /* StudentInfoModel.swift in Sources */,
 				7EA525E21E60AE1200DB657E /* StudentsTableViewController.swift in Sources */,
 				7EA525C11E508D6E00DB657E /* AppDelegate.swift in Sources */,
-				148821561E5DA41A00DB9355 /* TabBarController.swift in Sources */,
 				7EA525D71E59D93700DB657E /* constants.swift in Sources */,
 				7EA525D91E5DF85E00DB657E /* UIViewControllerExtension.swift in Sources */,
 				7EA525D31E59977F00DB657E /* UdacityUserAPI.swift in Sources */,

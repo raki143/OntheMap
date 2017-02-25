@@ -12,15 +12,8 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        getStudentLocations()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     /*
     // MARK: - Navigation
@@ -32,4 +25,23 @@ class MapViewController: UIViewController {
     }
     */
 
+    func getStudentLocations(){
+        
+        UdacityUserAPI.sharedInstance().getStudentLocations()
+        
+    }
+    
+    @IBAction func logout(){
+        UdacityUserAPI.sharedInstance().logout()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func postUserInformation(){
+        print("post user Info")
+    }
+    
+    @IBAction func refreshStudentLocations(){
+    
+        getStudentLocations()
+    }
 }

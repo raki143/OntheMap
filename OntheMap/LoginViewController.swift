@@ -114,13 +114,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                     if let account = jsonData?["account"] as? [String:AnyObject]{
                         
                         UdacityUser.uniqueKey = account["key"] as! String
-                        
+                       self.getUserData()
                         // present tab bar controller
-                        DispatchQueue.main.async {
-                            if let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarNavigationController"){
-                                self.present(tabBarController, animated: true, completion: nil)
-                            }
-                        }
+                        DispatchQueue.main.async(execute: {
+                            self.performSegue(withIdentifier: "loginToTabView", sender: self)
+                        })
+                        
                         
                     }else{
                         
@@ -157,6 +156,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         }
         return activityIndicator
     }
+    
+    func getUserData(){
+        
+        UdacityUserAPI.sharedInstance().getPublicUserData { (data, response, error) in
+            
+            if let error = error{
+                self.createAlertMessage(title: "Error", message: error.description)
+            }
+            
+        }
+        
+    }
+
 }
 
 

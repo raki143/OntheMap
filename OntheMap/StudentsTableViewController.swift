@@ -21,11 +21,25 @@ class StudentsTableViewController: UITableViewController{
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func getStudentLocations(){
+        
+        UdacityUserAPI.sharedInstance().getStudentLocations()
+        
     }
-
+    
+    @IBAction func logout(){
+        UdacityUserAPI.sharedInstance().logout()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func postUserInformation(){
+        print("post user Info")
+    }
+    
+    @IBAction func refreshStudentDetails(){
+        getStudentLocations()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,7 +69,7 @@ class StudentsTableViewController: UITableViewController{
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let availableURL = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text, let url = URL(string: availableURL) , UIApplication.shared.canOpenURL(url) == true else{
+        guard let availableURL = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text, let url = URL(string: availableURL) , UIApplication.shared.openURL(url) == true else{
             
             self.createAlertMessage(title: "Invalid URL", message: "Unable to open provided link.")
             return
