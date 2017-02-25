@@ -27,21 +27,40 @@ class MapViewController: UIViewController {
 
     func getStudentLocations(){
         
+        let activityIndicator = showActivityIndicator()
         UdacityUserAPI.sharedInstance().getStudentLocations(failure: { (error) in
             
             DispatchQueue.main.async(execute: {
+                activityIndicator.hide()
                  self.createAlertMessage(title: "Alert", message: "Unable to load students locations.please reload it.")
             })
            
             }) { (result) in
                 print("successfully loaded other student locations")
+                DispatchQueue.main.async(execute: {
+                    activityIndicator.hide()
+                })
         }
         
     }
     
     @IBAction func logout(){
-        UdacityUserAPI.sharedInstance().logout()
-        dismiss(animated: true, completion: nil)
+        
+        let activityIndicator = showActivityIndicator()
+        UdacityUserAPI.sharedInstance().logout { (result) in
+            
+            DispatchQueue.main.async(execute: {
+                activityIndicator.hide()
+            })
+            
+            if result{
+                DispatchQueue.main.async(execute: {
+                    self.dismiss(animated: true, completion: nil)
+                })
+            }else{
+                self.createAlertMessage(title: "Alert", message: "Error in logout. Please try again later.")
+            }
+        }
     }
     
     @IBAction func postUserInformation(){
@@ -51,5 +70,18 @@ class MapViewController: UIViewController {
     @IBAction func refreshStudentLocations(){
     
         getStudentLocations()
+    }
+    
+    //MARK: - Activity Indicator Method
+    func showActivityIndicator() -> UIActivityIndicatorView{
+        
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        DispatchQueue.main.async {
+            activityIndicator.center = self.view.center
+            activityIndicator.color = UIColor.black
+            self.view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+        }
+        return activityIndicator
     }
 }

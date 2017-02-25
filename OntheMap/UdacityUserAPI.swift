@@ -55,7 +55,7 @@ class UdacityUserAPI: NSObject {
         task.resume()
     }
     
-    func logout(){
+    func logout(result:@escaping (_ success:Bool) -> Void){
         
         let request = NSMutableURLRequest(url: URL(string: URLString.logout)!)
         request.httpMethod = "DELETE"
@@ -70,11 +70,13 @@ class UdacityUserAPI: NSObject {
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             if error != nil { // Handle error…
+                result(false)
                 return
             }
             let range = Range(uncheckedBounds: (5, data!.count - 5))
             let newData = data?.subdata(in: range) /* subset response data! */
             print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
+            result(true)
         }
         task.resume()
     }

@@ -91,7 +91,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         let activityIndicator = showActivityIndicator()
         UdacityUserAPI.sharedInstance().signInWithUdacityCredentials(userName: email, password: password) { (data, response, error) in
             
-            activityIndicator.hide()
+            DispatchQueue.main.async(execute: {
+                activityIndicator.hide()
+            })
+            
             
             if let response = response as? HTTPURLResponse{
                 if response.statusCode < 200 || response.statusCode > 300{
@@ -105,7 +108,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                     self.createAlertMessage(title: "Alert", message: "Seems like you don't have an internet connection")
                     return
                 }else{
-                    self.createAlertMessage(title: "Alert", message: "Please try again.")
+                    self.createAlertMessage(title: "Alert", message: "sorry we are unable to serve your request.Please try again.")
                 }
             }else{
                 do{
