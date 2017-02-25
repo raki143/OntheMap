@@ -19,6 +19,9 @@
 		7EA525D71E59D93700DB657E /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525D61E59D93700DB657E /* constants.swift */; };
 		7EA525D91E5DF85E00DB657E /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525D81E5DF85E00DB657E /* UIViewControllerExtension.swift */; };
 		7EA525DB1E5E200200DB657E /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525DA1E5E200200DB657E /* StudentInformation.swift */; };
+		7EA525DD1E6086BC00DB657E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525DC1E6086BC00DB657E /* MapViewController.swift */; };
+		7EA525E01E6088F900DB657E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA525DF1E6088F900DB657E /* MapKit.framework */; };
+		7EA525E21E60AE1200DB657E /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525E11E60AE1200DB657E /* StudentsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		7EA525D61E59D93700DB657E /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		7EA525D81E5DF85E00DB657E /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		7EA525DA1E5E200200DB657E /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		7EA525DC1E6086BC00DB657E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		7EA525DF1E6088F900DB657E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7EA525E11E60AE1200DB657E /* StudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EA525E01E6088F900DB657E /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +62,8 @@
 				7EA525C21E508D6E00DB657E /* LoginViewController.swift */,
 				148821551E5DA41A00DB9355 /* TabBarController.swift */,
 				7EA525D81E5DF85E00DB657E /* UIViewControllerExtension.swift */,
+				7EA525DC1E6086BC00DB657E /* MapViewController.swift */,
+				7EA525E11E60AE1200DB657E /* StudentsTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -75,6 +84,7 @@
 			children = (
 				7EA525BF1E508D6E00DB657E /* OntheMap */,
 				7EA525BE1E508D6E00DB657E /* Products */,
+				7EA525DE1E6088F900DB657E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +109,14 @@
 				7EA525CC1E508D6E00DB657E /* Info.plist */,
 			);
 			path = OntheMap;
+			sourceTree = "<group>";
+		};
+		7EA525DE1E6088F900DB657E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EA525DF1E6088F900DB657E /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,7 +194,9 @@
 				7EA525DB1E5E200200DB657E /* StudentInformation.swift in Sources */,
 				7EA525C31E508D6E00DB657E /* LoginViewController.swift in Sources */,
 				7EA525D51E59CD1B00DB657E /* UdacityStudent.swift in Sources */,
+				7EA525DD1E6086BC00DB657E /* MapViewController.swift in Sources */,
 				144B25241E6033F800E3DEF7 /* StudentInfoModel.swift in Sources */,
+				7EA525E21E60AE1200DB657E /* StudentsTableViewController.swift in Sources */,
 				7EA525C11E508D6E00DB657E /* AppDelegate.swift in Sources */,
 				148821561E5DA41A00DB9355 /* TabBarController.swift in Sources */,
 				7EA525D71E59D93700DB657E /* constants.swift in Sources */,

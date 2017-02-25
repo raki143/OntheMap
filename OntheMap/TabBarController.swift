@@ -19,6 +19,7 @@ class TabBarController: UITabBarController {
         navigationItem.rightBarButtonItems = [pinButton,reloadButton]
         
         getUserData()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
