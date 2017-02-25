@@ -23,7 +23,19 @@ class StudentsTableViewController: UITableViewController{
 
     func getStudentLocations(){
         
-        UdacityUserAPI.sharedInstance().getStudentLocations()
+        UdacityUserAPI.sharedInstance().getStudentLocations(failure: { (error) in
+           
+            DispatchQueue.main.async(execute: {
+                self.createAlertMessage(title: "Alert", message: "Unable to load students locations.please reload it.")
+            })
+            
+        }) { (result) in
+            print("successfully loaded other student locations")
+            DispatchQueue.main.async(execute: {
+                self.tableView.reloadData()
+            })
+            
+        }
         
     }
     

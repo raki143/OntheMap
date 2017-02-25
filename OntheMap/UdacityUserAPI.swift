@@ -124,7 +124,7 @@ class UdacityUserAPI: NSObject {
         
     }
     
-    func getStudentLocations(){
+    func getStudentLocations(failure : @escaping (_ errorOccured : Error) -> Void, success: @escaping (_ result:Bool) -> Void){
         
         let url = URL(string: URLString.studentLocations)
         var urlComponents = URLComponents(string: url!.absoluteString)
@@ -143,16 +143,19 @@ class UdacityUserAPI: NSObject {
             
             guard (error == nil) else {
                 // propagate this error using notification
+                failure(onTheMapErrors.ErrorInGetStudentLocations)
                 return
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
                 // propagate this error using notification
+                failure(onTheMapErrors.ErrorInGetStudentLocations)
                 return
             }
             
             guard let data = data else{
                 // propagate this error using notification
+                failure(onTheMapErrors.ErrorInGetStudentLocations)
                 return
             }
             
@@ -162,6 +165,7 @@ class UdacityUserAPI: NSObject {
                 if let jsonData = try  JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String:AnyObject]{
                     if let studentArray = jsonData["results"] as? [[String:AnyObject]]{
                         StudentInfoModel.getStudentList(fromStudents: studentArray)
+                        success(true)
                     }
                 }
 

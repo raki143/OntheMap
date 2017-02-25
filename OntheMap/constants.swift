@@ -65,3 +65,4 @@ struct StudentInfoKeys{
     // Updated At Key
     static let updatedAtKey = "updatedAt"
 }
+
