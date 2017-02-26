@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
+    @IBOutlet weak var mapView: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
         getStudentLocations()
     }
 
@@ -39,6 +43,7 @@ class MapViewController: UIViewController {
                 print("successfully loaded other student locations")
                 DispatchQueue.main.async(execute: {
                     activityIndicator.hide()
+                    self.showPins()
                 })
         }
         
@@ -72,6 +77,51 @@ class MapViewController: UIViewController {
         getStudentLocations()
     }
     
+    func showPins(){
+        
+        let students = StudentInfoModel.students
+        
+        // We will create an MKPointAnnotation for each dictionary in "locations". The
+        // point annotations will be stored in this array, and then provided to the map view.
+        var annotations = [MKPointAnnotation]()
+        
+        DispatchQueue.main.async { 
+            for annotation in self.mapView.annotations{
+                self.mapView.removeAnnotation(annotation)
+            }
+        }
+        
+        for student in students {
+            
+            // Notice that the float values are being used to create CLLocationDegree values.
+            // This is a version of the Double type.
+            let lat = CLLocationDegrees(student.latitude)
+            let long = CLLocationDegrees(student.longitude)
+            
+            // The lat and long are used to create a CLLocationCoordinates2D instance.
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            
+            let first = student.firstName
+            let last = student.lastName
+            let mediaURL = student.mediaURL
+            
+            // Here we create the annotation and set its coordiate, title, and subtitle properties
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(first) \(last)"
+            annotation.subtitle = mediaURL
+            
+            // Finally we place the annotation in an array of annotations.
+            annotations.append(annotation)
+        }
+        
+        // When the array is complete, we add the annotations to the map.
+        DispatchQueue.main.async { 
+            self.mapView.addAnnotations(annotations)
+        }
+        
+    }
+    
     //MARK: - Activity Indicator Method
     func showActivityIndicator() -> UIActivityIndicatorView{
         
@@ -83,5 +133,38 @@ class MapViewController: UIViewController {
             activityIndicator.startAnimating()
         }
         return activityIndicator
+    }
+    
+    //MARK: - MKMapViewDelegate Methods
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == view.rightCalloutAccessoryView {
+                        
+            guard let availableURL = view.annotation?.subtitle, let url = URL(string: availableURL!) , UIApplication.shared.openURL(url) == true else{
+                
+                self.createAlertMessage(title: "Invalid URL", message: "Unable to open provided link.")
+                return
+            }
+
+        }
     }
 }
