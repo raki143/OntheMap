@@ -83,7 +83,21 @@ class UdacityUserAPI: NSObject {
     
     func getPublicUserData(completionHandler handler:RequestCompletionHandler?){
       
-        let request = NSMutableURLRequest(url: URL(string: URLString.userInfo+UdacityUser.uniqueKey)!)
+        let url = URL(string: URLString.userInfo)
+        var urlComponents = URLComponents(string: url!.absoluteString)
+        
+        let queryValue = "{\"\(StudentInfoKeys.uniqueKeyKey)\":\"\(UdacityUser.sharedInstance.uniqueKey!)\"}"
+        
+        urlComponents?.queryItems = [URLQueryItem(name: "where", value:"\(queryValue)")]
+        
+        guard let urlWithParam = urlComponents?.url else {
+            return
+        }
+        print("userInfo url is \(urlWithParam)")
+        
+        let request = NSMutableURLRequest(url: urlWithParam)
+        request.addValue(Values.parseAppID, forHTTPHeaderField: Keys.parseAppID)
+        request.addValue(Values.APIKey, forHTTPHeaderField: Keys.APIKey)
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
@@ -98,19 +112,19 @@ class UdacityUserAPI: NSObject {
                 return
             }
             
-            let newData = data.subdata(in: Range(5..<data.count)) /* subset response data! */
-            print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
+        
+            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
             
 
             do{
-                if let jsonData = try JSONSerialization.jsonObject(with:newData, options:.allowFragments) as? [String:AnyObject]{
+                if let jsonData = try JSONSerialization.jsonObject(with:data, options:.allowFragments) as? [String:AnyObject]{
                     
                     print("user json is \(jsonData)")
                     
-                    if let userDict = jsonData["user"] as? [String:AnyObject]{
+                    if let userDict = jsonData["results"] as? [String:AnyObject]{
                         
-                        UdacityUser.firstName = userDict["first_name"] as! String
-                        UdacityUser.lastName = userDict["last_name"] as! String
+                      let udacityUserInfo = UdacityUser(studentDict: userDict)
+                        
                     }
 
                 }

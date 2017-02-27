@@ -8,13 +8,36 @@
 
 import Foundation
 
-struct UdacityUser{
-    //Initialized to empty strings to ease parsing through data.
-    static var firstName: String = ""
-    static var lastName: String = ""
-    static var uniqueKey: String = ""
-    static var latitude: Double = 0.0
-    static var longitude: Double = 0.0
-    static var mapString: String = ""
-    static var mediaURL: String = ""
+class UdacityUser : NSObject{
+    
+    var firstName: String?
+    var lastName: String?
+    var uniqueKey: String?
+    var latitude: Double?
+    var longitude: Double?
+    var mapString: String?
+    var mediaURL: String?
+    var objectId: String?
+    var updatedAt: String?
+    
+    init(studentDict : [String : AnyObject]){
+        
+        objectId = studentDict[StudentInfoKeys.objectIdKey] as! String?
+        updatedAt = studentDict[StudentInfoKeys.updatedAtKey] as! String?
+        firstName = studentDict[StudentInfoKeys.firstNameKey] as! String?
+        lastName = studentDict[StudentInfoKeys.lastNameKey] as! String?
+        uniqueKey = studentDict[StudentInfoKeys.uniqueKeyKey] as! String?
+        latitude = studentDict[StudentInfoKeys.latitudeKey] as! Double?
+        longitude = studentDict[StudentInfoKeys.longitudeKey] as! Double?
+        mapString = studentDict[StudentInfoKeys.mapStringKey] as! String?
+        mediaURL = studentDict[StudentInfoKeys.mediaURLKey] as! String?
+        
+    }
+    
+    static let sharedInstance : UdacityUser = {
+     
+        let instance = UdacityUser(studentDict: [:])
+        return instance
+    }()
+    
 }
