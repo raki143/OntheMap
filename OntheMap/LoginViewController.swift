@@ -118,7 +118,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                         
                         UdacityUser.sharedInstance.uniqueKey = account["key"] as? String
                        self.getUserData()
-                        // present tab bar controller
+                        
                         DispatchQueue.main.async(execute: {
                             self.performSegue(withIdentifier: "loginToTabView", sender: self)
                         })

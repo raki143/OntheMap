@@ -30,7 +30,7 @@ class UdacityUserAPI: NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"udacity\": {\"username\": \"\(userName)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
-    
+        
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
             if error != nil {
@@ -43,7 +43,7 @@ class UdacityUserAPI: NSObject {
                 return
             }
             
-
+            
             let newData = data.subdata(in: Range(5..<data.count)) /* subset response data! */
             print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
             
@@ -82,62 +82,67 @@ class UdacityUserAPI: NSObject {
     }
     
     func getPublicUserData(completionHandler handler:RequestCompletionHandler?){
-      
-        let url = URL(string: URLString.userInfo)
-        var urlComponents = URLComponents(string: url!.absoluteString)
         
-        let queryValue = "{\"\(StudentInfoKeys.uniqueKeyKey)\":\"\(UdacityUser.sharedInstance.uniqueKey!)\"}"
-        
-        urlComponents?.queryItems = [URLQueryItem(name: "where", value:"\(queryValue)")]
-        
-        guard let urlWithParam = urlComponents?.url else {
-            return
-        }
-        print("userInfo url is \(urlWithParam)")
-        
-        let request = NSMutableURLRequest(url: urlWithParam)
-        request.addValue(Values.parseAppID, forHTTPHeaderField: Keys.parseAppID)
-        request.addValue(Values.APIKey, forHTTPHeaderField: Keys.APIKey)
-        
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+        do{
             
-            if error != nil {
-                if let handler = handler{
-                    handler(nil,nil,error as NSError?)
-                }
+            let url = URL(string: URLString.userInfo)
+            var urlComponents = URLComponents(string: url!.absoluteString)
+            let query = ["\(StudentInfoKeys.uniqueKeyKey)":"\(UdacityUser.sharedInstance.uniqueKey!)"]
+            let dataValue = try JSONSerialization.data(withJSONObject: query, options: JSONSerialization.WritingOptions())
+            let qValue = NSString(data: dataValue, encoding: String.Encoding.utf8.rawValue)! as String
+            
+            urlComponents?.queryItems = [URLQueryItem(name: "where", value:"\(qValue)")]
+            
+            guard let urlWithParam = urlComponents?.url else {
                 return
             }
+            print("userInfo url is \(urlWithParam)")
             
-            guard let data = data else{
-                return
-            }
+            let request = NSMutableURLRequest(url: urlWithParam)
+            request.addValue(Values.parseAppID, forHTTPHeaderField: Keys.parseAppID)
+            request.addValue(Values.APIKey, forHTTPHeaderField: Keys.APIKey)
             
-        
-            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
-            
-
-            do{
-                if let jsonData = try JSONSerialization.jsonObject(with:data, options:.allowFragments) as? [String:AnyObject]{
-                    
-                    print("user json is \(jsonData)")
-                    
-                    if let userDict = jsonData["results"] as? [String:AnyObject]{
-                        
-                      let udacityUserInfo = UdacityUser(studentDict: userDict)
-                        
+            let task = session.dataTask(with: request as URLRequest) { data, response, error in
+                
+                if error != nil {
+                    if let handler = handler{
+                        handler(nil,nil,error as NSError?)
                     }
-
+                    return
                 }
                 
-
-            }catch let error{
-                print(error)
+                guard let data = data else{
+                    return
+                }
+                
+                
+                print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
+                
+                
+                do{
+                    if let jsonData = try JSONSerialization.jsonObject(with:data, options:.allowFragments) as? [String:AnyObject]{
+                        
+                        print("user json is \(jsonData)")
+                        
+                        if let userDict = jsonData["results"] as? [String:AnyObject], !userDict.isEmpty {
+                            
+                            let _ = UdacityUser(studentDict: userDict)
+                            
+                        }
+                        
+                    }
+                    
+                    
+                }catch let error{
+                    print(error)
+                }
             }
             
+            task.resume()
             
+        }catch let error{
+            print(error)
         }
-        task.resume()
-        
     }
     
     func getStudentLocations(failure : @escaping (_ errorOccured : Error) -> Void, success: @escaping (_ result:Bool) -> Void){
@@ -150,7 +155,7 @@ class UdacityUserAPI: NSObject {
         guard let urlWithParam = urlComponents?.url else {
             return
         }
-
+        
         let request = NSMutableURLRequest(url: urlWithParam)
         request.addValue(Values.parseAppID, forHTTPHeaderField: Keys.parseAppID)
         request.addValue(Values.APIKey, forHTTPHeaderField: Keys.APIKey)
@@ -184,12 +189,12 @@ class UdacityUserAPI: NSObject {
                         success(true)
                     }
                 }
-
+                
             }catch let error{
                 print(error)
             }
         }
         task.resume()
-
+        
     }
 }
