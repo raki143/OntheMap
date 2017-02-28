@@ -10,5 +10,8 @@ import Foundation
 
 enum onTheMapErrors : Error {
    
-    case ErrorInGetStudentLocations
+    case noError // This is used because nil is not compatible with Error
+    case errorInGetStudentLocations
+    case errorInGetUserPublicData
+    case errorInGetUserLocationData
 }

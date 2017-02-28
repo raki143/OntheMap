@@ -89,49 +89,72 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
             return
         }
         let activityIndicator = showActivityIndicator()
+        
         UdacityUserAPI.sharedInstance().signInWithUdacityCredentials(userName: email, password: password) { (data, response, error) in
-            
-            DispatchQueue.main.async(execute: {
-                activityIndicator.hide()
-            })
-            
-            
+        
+
             if let response = response as? HTTPURLResponse{
                 if response.statusCode < 200 || response.statusCode > 300{
+                    
+                    activityIndicator.hide()
                     self.createAlertMessage(title: "Alert", message: "Incorrect Username or Password. Please enter correct credentials.")
                     return
                 }
             }
             
             if let error = error{
+                
+                activityIndicator.hide()
+
                 if error.code == NSURLErrorNotConnectedToInternet{
                     self.createAlertMessage(title: "Alert", message: "Seems like you don't have an internet connection")
                     return
                 }else{
                     self.createAlertMessage(title: "Alert", message: "sorry we are unable to serve your request.Please try again.")
                 }
+                
             }else{
+                
                 do{
                     let jsonData = try JSONSerialization.jsonObject(with:data!, options:.allowFragments) as? [String:AnyObject]
                     
                     if let account = jsonData?["account"] as? [String:AnyObject]{
                         
+                        // store unique key
                         UdacityUser.sharedInstance.uniqueKey = account["key"] as? String
-                       self.getUserData()
+                       
+                        // fetch user infromation
+                        UdacityUserAPI.sharedInstance().getUserLocationData { (result, err) in
+                            
+                            activityIndicator.hide()
+
+                            if result {
+                               
+                                // on success
+                                DispatchQueue.main.async(execute: {
+                                    self.performSegue(withIdentifier: "loginToTabView", sender: self)
+                                })
+
+                            }else{
+                               
+                                // failure to fetch user information.
+                                self.createAlertMessage(title: "Alert", message: "sorry we are unable to fetch user details.Please try again.")
+                            }
+                        }
                         
-                        DispatchQueue.main.async(execute: {
-                            self.performSegue(withIdentifier: "loginToTabView", sender: self)
-                        })
                         
                         
                     }else{
                         
+                        activityIndicator.hide()
                         self.createAlertMessage(title: "Alert", message: "Incorrect Username or Password. Please enter correct credentials.")
                         return
                         
                     }
                 }catch{
-                    print("the json data could not be obtained")
+                    
+                    activityIndicator.hide()
+                    self.createAlertMessage(title: "Alert", message: "sorry we are unable to serve your request.Please try again.")
                     
                 }
                 
@@ -160,17 +183,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         return activityIndicator
     }
     
-    func getUserData(){
-        
-        UdacityUserAPI.sharedInstance().getPublicUserData { (data, response, error) in
-            
-            if let error = error{
-                self.createAlertMessage(title: "Error", message: error.description)
-            }
-            
-        }
-        
-    }
+
 
 }
 

@@ -10,7 +10,7 @@ import Foundation
 
 typealias RequestCompletionHandler = (_ data: Data?, _ response: URLResponse?, _ error: NSError?) -> Void
 
-// This class provides method for login, logout and getpublicUserDat
+
 class UdacityUserAPI: NSObject {
     
     // shared session
@@ -81,7 +81,7 @@ class UdacityUserAPI: NSObject {
         task.resume()
     }
     
-    func getPublicUserData(completionHandler handler:RequestCompletionHandler?){
+    func getUserLocationData(success: @escaping (_ result:Bool, _ error : Error) -> Void){
         
         do{
             
@@ -104,18 +104,23 @@ class UdacityUserAPI: NSObject {
             
             let task = session.dataTask(with: request as URLRequest) { data, response, error in
                 
-                if error != nil {
-                    if let handler = handler{
-                        handler(nil,nil,error as NSError?)
-                    }
+                
+                guard (error == nil) else{
+                    success(false,onTheMapErrors.errorInGetUserLocationData)
+                    return
+                }
+                
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                    success(false, onTheMapErrors.errorInGetUserLocationData)
                     return
                 }
                 
                 guard let data = data else{
+                    success(false, onTheMapErrors.errorInGetUserLocationData)
                     return
                 }
-                
-                
+            
+
                 print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
                 
                 
@@ -124,24 +129,34 @@ class UdacityUserAPI: NSObject {
                         
                         print("user json is \(jsonData)")
                         
-                        if let userDict = jsonData["results"] as? [String:AnyObject], !userDict.isEmpty {
+                        if let userDict = jsonData["results"] as? [String:AnyObject]{
                             
-                            let _ = UdacityUser(studentDict: userDict)
+                                let _ = UdacityUser(studentDict: userDict)
+                                success(true, onTheMapErrors.noError)
                             
+                        }else{
+                           
+                            self.getUserPublicData(success: { (result, err) in
+                                
+                                // if result is false implies unable to fetch user details.
+                                success(result,err)
+                            })
                         }
                         
                     }
                     
                     
-                }catch let error{
-                    print(error)
+                }catch {
+                    success(false, onTheMapErrors.errorInGetUserLocationData)
+                    return
                 }
             }
             
             task.resume()
             
-        }catch let error{
-            print(error)
+        }catch {
+            success(false, onTheMapErrors.errorInGetUserLocationData)
+            return
         }
     }
     
@@ -164,22 +179,23 @@ class UdacityUserAPI: NSObject {
             
             guard (error == nil) else {
                 // propagate this error using notification
-                failure(onTheMapErrors.ErrorInGetStudentLocations)
+                failure(onTheMapErrors.errorInGetStudentLocations)
                 return
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
                 // propagate this error using notification
-                failure(onTheMapErrors.ErrorInGetStudentLocations)
+                failure(onTheMapErrors.errorInGetStudentLocations)
                 return
             }
             
             guard let data = data else{
                 // propagate this error using notification
-                failure(onTheMapErrors.ErrorInGetStudentLocations)
+                failure(onTheMapErrors.errorInGetStudentLocations)
                 return
             }
             
+            print("************ getStudentLocations ******************")
             print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
             
             do{
@@ -192,9 +208,64 @@ class UdacityUserAPI: NSObject {
                 
             }catch let error{
                 print(error)
+                failure(onTheMapErrors.errorInGetStudentLocations)
             }
         }
         task.resume()
         
     }
+    
+    func getUserPublicData(success: @escaping (_ result:Bool, _ error : Error) -> Void){
+        
+        let url = URL(string: URLString.publicUserData+UdacityUser.sharedInstance.uniqueKey!)
+        let request = NSMutableURLRequest(url: url!)
+        request.addValue(Values.parseAppID, forHTTPHeaderField: Keys.parseAppID)
+        request.addValue(Values.APIKey, forHTTPHeaderField: Keys.APIKey)
+        
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            
+            guard (error == nil) else{
+                success(false,onTheMapErrors.errorInGetUserPublicData)
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                success(false, onTheMapErrors.errorInGetUserPublicData)
+                return
+            }
+            
+            guard let data = data else{
+                success(false, onTheMapErrors.errorInGetUserPublicData)
+                return
+            }
+            
+            let newData = data.subdata(in: Range(5..<data.count))
+            
+            print("************** getUserPublicData ********************")
+            print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
+            
+            do{
+                if let jsonData = try  JSONSerialization.jsonObject(with: newData, options:.allowFragments) as? [String:AnyObject]{
+                    if let userDetails = jsonData["user"] as? [String:AnyObject], let firstName = userDetails["first_name"], let lastName = userDetails["last_name"]{
+                        
+                        UdacityUser.sharedInstance.firstName = firstName as? String
+                        UdacityUser.sharedInstance.lastName = lastName as? String
+                        success(true, onTheMapErrors.noError)
+                    
+                    }else{
+                        success(false, onTheMapErrors.errorInGetUserPublicData)
+ 
+                    }
+                }
+                
+            }catch let error{
+                print(error)
+                success(false, onTheMapErrors.errorInGetUserPublicData)
+
+            }
+        }
+        
+        task.resume()
+    }
+    
 }
