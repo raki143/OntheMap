@@ -268,4 +268,115 @@ class UdacityUserAPI: NSObject {
         task.resume()
     }
     
+    func updatestudentLocationWith(location:LocationModel,withMediaURL mediaURL:String, usingUdacityUserDetails user:UdacityUser, withHandler responseClosure: @escaping (_ success:Bool, _ error:Error) -> Void){
+
+            let url = URL(string: URLString.userInfo+UdacityUser.sharedInstance.objectId!)
+            let request = NSMutableURLRequest(url: url!)
+            request.httpMethod = "PUT"
+            request.addValue(Values.parseAppID, forHTTPHeaderField: Keys.parseAppID)
+            request.addValue(Values.APIKey, forHTTPHeaderField: Keys.APIKey)
+            request.addValue(Values.contentType, forHTTPHeaderField: Keys.contentType)
+            
+            let requestBody = [StudentInfoKeys.uniqueKeyKey:"\(user.uniqueKey!)", StudentInfoKeys.firstNameKey : "\(user.firstName!)", StudentInfoKeys.lastNameKey : "\(user.lastName!)", StudentInfoKeys.mapStringKey:"\(location.mapString)", StudentInfoKeys.mediaURLKey:"\(mediaURL)",StudentInfoKeys.latitudeKey:"\(location.latitude)",StudentInfoKeys.longitudeKey:"\(location.longitude)"]
+            
+            request.httpBody = try! JSONSerialization.data(withJSONObject: requestBody, options: JSONSerialization.WritingOptions())
+        
+            let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                
+                guard (error == nil) else{
+                    responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
+                    return
+                }
+                
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                    responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
+                    return
+                }
+                
+                guard let data = data else{
+                    responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
+                    return
+                }
+                
+                do{
+                    if let jsonData = try  JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String:AnyObject], let updatedAt = jsonData[JSONResponseKeys.updatedAt] as? String{
+                        
+                        user.updatedAt = updatedAt
+                        user.latitude = location.latitude
+                        user.longitude = location.longitude
+                        user.mapString = location.mapString
+                        user.mediaURL = mediaURL
+                        responseClosure(true,onTheMapErrors.noError)
+                    }
+                    
+                    responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
+                    
+                }catch{
+                    responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
+                    return
+                }
+
+                
+        }
+        
+        task.resume()
+
+    }
+    
+    func postStudentLocationWith(location:LocationModel,withMediaURL mediaURL:String, usingUdacityUserDetails user:UdacityUser, withHandler responseClosure: @escaping (_ success:Bool, _ error:Error) -> Void){
+        
+        let url = URL(string: URLString.userInfo)
+        let request = NSMutableURLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.addValue(Values.parseAppID, forHTTPHeaderField: Keys.parseAppID)
+        request.addValue(Values.APIKey, forHTTPHeaderField: Keys.APIKey)
+        request.addValue(Values.contentType, forHTTPHeaderField: Keys.contentType)
+        
+        let requestBody = [StudentInfoKeys.uniqueKeyKey:"\(user.uniqueKey!)", StudentInfoKeys.firstNameKey : "\(user.firstName!)", StudentInfoKeys.lastNameKey : "\(user.lastName!)", StudentInfoKeys.mapStringKey:"\(location.mapString)", StudentInfoKeys.mediaURLKey:"\(mediaURL)",StudentInfoKeys.latitudeKey:"\(location.latitude)",StudentInfoKeys.longitudeKey:"\(location.longitude)"]
+        
+        request.httpBody = try! JSONSerialization.data(withJSONObject: requestBody, options: JSONSerialization.WritingOptions())
+        
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            
+            guard (error == nil) else{
+                responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
+                return
+            }
+            
+            guard let data = data else{
+                responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
+                return
+            }
+            
+            do{
+                if let jsonData = try  JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String:AnyObject], let objectID = jsonData[JSONResponseKeys.objectID] as? String,let createdAt = jsonData[JSONResponseKeys.updatedAt] as? String{
+                   
+                    user.updatedAt = createdAt
+                    user.objectId = objectID
+                    user.latitude = location.latitude
+                    user.longitude = location.longitude
+                    user.mapString = location.mapString
+                    user.mediaURL = mediaURL
+                    responseClosure(true,onTheMapErrors.noError)
+                }
+                
+                responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
+                
+            }catch{
+                responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
+                return
+            }
+            
+            
+        }
+        
+        task.resume()
+        
+    }
+    
 }

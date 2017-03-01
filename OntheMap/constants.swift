@@ -17,6 +17,7 @@ struct URLString {
     static let studentLocations = "https://parse.udacity.com/parse/classes/StudentLocation"
     static let userInfo = "https://parse.udacity.com/parse/classes/StudentLocation"
     static let publicUserData = "https://www.udacity.com/api/users/"
+
 }
 
 
@@ -25,14 +26,15 @@ struct Values{
     
     static let parseAppID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
     static let APIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
-    
+    static let contentType = "application/json"
 }
 
 struct Keys{
     
     static let parseAppID = "X-Parse-Application-Id"
     static let APIKey = "X-Parse-REST-API-Key"
-    
+    static let contentType = "Content-Type"
+    static let accept = "Accept"
 }
 
 struct StudentInfoKeys{
@@ -65,5 +67,21 @@ struct StudentInfoKeys{
     
     // Updated At Key
     static let updatedAtKey = "updatedAt"
+}
+
+// Json response keys
+struct JSONResponseKeys {
+    static let error = "error"
+    static let results = "results"
+    static let objectID = "objectId"
+    static let updatedAt = "updatedAt"
+    static let uniqueKey = "uniqueKey"
+    static let firstName = "firstName"
+    static let lastName = "lastName"
+    static let mediaURL = "mediaURL"
+    static let latitude = "latitude"
+    static let longitude = "longitude"
+    static let mapString = "mapString"
+    static let createdAt = "createdAt"
 }
 

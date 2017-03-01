@@ -14,4 +14,6 @@ enum onTheMapErrors : Error {
     case errorInGetStudentLocations
     case errorInGetUserPublicData
     case errorInGetUserLocationData
+    case errorInUpdateStudentLocation
+    case errorInPostingStudentLocation
 }
