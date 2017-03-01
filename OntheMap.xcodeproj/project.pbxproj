@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		144B25241E6033F800E3DEF7 /* StudentInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144B25231E6033F800E3DEF7 /* StudentInfoModel.swift */; };
 		14AA030F1E66BD7500D69831 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA030E1E66BD7500D69831 /* LocationModel.swift */; };
+		7E847AD11E6752430096AEF9 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E847AD01E6752430096AEF9 /* InformationPostingViewController.swift */; };
 		7EA525C11E508D6E00DB657E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525C01E508D6E00DB657E /* AppDelegate.swift */; };
 		7EA525C31E508D6E00DB657E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA525C21E508D6E00DB657E /* LoginViewController.swift */; };
 		7EA525C61E508D6E00DB657E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA525C41E508D6E00DB657E /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		144B25231E6033F800E3DEF7 /* StudentInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfoModel.swift; sourceTree = "<group>"; };
 		14AA030E1E66BD7500D69831 /* LocationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		7E847AD01E6752430096AEF9 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 		7EA525BD1E508D6E00DB657E /* OntheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OntheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA525C01E508D6E00DB657E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EA525C21E508D6E00DB657E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				7EA525D81E5DF85E00DB657E /* UIViewControllerExtension.swift */,
 				7EA525DC1E6086BC00DB657E /* MapViewController.swift */,
 				7EA525E11E60AE1200DB657E /* StudentsTableViewController.swift */,
+				7E847AD01E6752430096AEF9 /* InformationPostingViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				7EA525C31E508D6E00DB657E /* LoginViewController.swift in Sources */,
 				7EA525D51E59CD1B00DB657E /* UdacityUser.swift in Sources */,
 				7EA525DD1E6086BC00DB657E /* MapViewController.swift in Sources */,
+				7E847AD11E6752430096AEF9 /* InformationPostingViewController.swift in Sources */,
 				14AA030F1E66BD7500D69831 /* LocationModel.swift in Sources */,
 				144B25241E6033F800E3DEF7 /* StudentInfoModel.swift in Sources */,
 				7EA525E21E60AE1200DB657E /* StudentsTableViewController.swift in Sources */,
