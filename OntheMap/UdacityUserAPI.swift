@@ -200,7 +200,7 @@ class UdacityUserAPI: NSObject {
             
             do{
                 if let jsonData = try  JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String:AnyObject]{
-                    if let studentArray = jsonData["results"] as? [[String:AnyObject]]{
+                    if let studentArray = jsonData[JSONResponseKeys.results] as? [[String:AnyObject]]{
                         StudentInfoModel.getStudentList(fromStudents: studentArray)
                         success(true)
                     }
