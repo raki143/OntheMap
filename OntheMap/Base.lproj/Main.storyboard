@@ -247,7 +247,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WS-zt-cTC">
                                         <state key="normal" title="Cancel"/>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter a link to share here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EoF-VJ-n7i">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter a link to share here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EoF-VJ-n7i" userLabel="linkText View">
                                         <color key="backgroundColor" red="0.2699861308" green="0.53462754349999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -313,6 +313,16 @@
                             <constraint firstItem="NYu-0n-6Eo" firstAttribute="leading" secondItem="1HJ-aa-HN9" secondAttribute="leading" id="ydR-HS-Oft"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttomView" destination="ApU-bA-TdZ" id="5AV-7l-QgF"/>
+                        <outlet property="cancelButton" destination="4WS-zt-cTC" id="8we-GI-fxf"/>
+                        <outlet property="findOnMapButton" destination="aMq-hk-Eqr" id="fZp-KM-dg7"/>
+                        <outlet property="linkTextView" destination="EoF-VJ-n7i" id="LEn-7d-6Tv"/>
+                        <outlet property="locationMapView" destination="NYu-0n-6Eo" id="qJv-P0-6o4"/>
+                        <outlet property="locationTextView" destination="6bo-a9-ghc" id="WlA-vc-efx"/>
+                        <outlet property="submitButton" destination="0tZ-Yf-1Ko" id="Yis-Ah-drH"/>
+                        <outlet property="titleLabel" destination="AMS-va-iMl" id="sDA-CM-etb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hng-s3-AUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

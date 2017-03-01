@@ -7,13 +7,27 @@
 //
 
 import UIKit
+import MapKit
 
-class InformationPostingViewController: UIViewController {
+class InformationPostingViewController: UIViewController,UITextViewDelegate {
+
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var linkTextView: UITextView!
+    @IBOutlet weak var buttomView: UIView!
+    @IBOutlet weak var findOnMapButton: UIButton!
+    @IBOutlet weak var locationMapView: MKMapView!
+    @IBOutlet weak var locationTextView: UITextView!
+    @IBOutlet weak var submitButton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        linkTextView.delegate = self
+        locationTextView.delegate = self
+        
+        
     }
 
     
