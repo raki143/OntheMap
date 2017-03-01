@@ -356,6 +356,7 @@ class UdacityUserAPI: NSObject {
             do{
                 if let jsonData = try  JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String:AnyObject], let objectID = jsonData[JSONResponseKeys.objectID] as? String,let createdAt = jsonData[JSONResponseKeys.updatedAt] as? String{
                    
+                    print("objectID is \(objectID)")
                     user.updatedAt = createdAt
                     user.objectId = objectID
                     user.latitude = location.latitude
