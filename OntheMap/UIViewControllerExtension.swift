@@ -20,6 +20,15 @@ extension UIViewController{
             self.present(alert, animated: true, completion: nil)
         })
     }
+    
+    func clearOutKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 
 }
 
