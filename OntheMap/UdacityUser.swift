@@ -19,6 +19,7 @@ class UdacityUser : NSObject{
     var mediaURL: String?
     var objectId: String?
     var updatedAt: String?
+    var createdAt: String?
     
     init(studentDict : [String : AnyObject]){
         
@@ -31,6 +32,7 @@ class UdacityUser : NSObject{
         longitude = studentDict[StudentInfoKeys.longitudeKey] as! Double?
         mapString = studentDict[StudentInfoKeys.mapStringKey] as! String?
         mediaURL = studentDict[StudentInfoKeys.mediaURLKey] as! String?
+        createdAt = studentDict[StudentInfoKeys.createdAtKey] as! String?
         
     }
     

@@ -129,9 +129,18 @@ class UdacityUserAPI: NSObject {
                         
                         print("user json is \(jsonData)")
                         
-                        if let userDict = jsonData["results"] as? [String:AnyObject]{
+                        if let userInfoArray = jsonData["results"] as? [[String:AnyObject]], userInfoArray.count > 0 {
                             
-                                let _ = UdacityUser(studentDict: userDict)
+                            print("userInfoArray is \(userInfoArray)")
+                            
+                            let count = userInfoArray.count
+                            let userDict = userInfoArray[count - 1]
+                            
+                                print("userInfo is \(userDict)")
+                                let udacityUser = UdacityUser(studentDict: userDict)
+                                print("shared Instance objectId is \(UdacityUser.sharedInstance.objectId)")
+                                print("objectId is \(udacityUser.objectId)")
+                            
                                 success(true, onTheMapErrors.noError)
                             
                         }else{
@@ -354,9 +363,10 @@ class UdacityUserAPI: NSObject {
             }
             
             do{
-                if let jsonData = try  JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String:AnyObject], let objectID = jsonData[JSONResponseKeys.objectID] as? String,let createdAt = jsonData[JSONResponseKeys.updatedAt] as? String{
+                if let jsonData = try  JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String:AnyObject], let objectID = jsonData[JSONResponseKeys.objectID] as? String,let createdAt = jsonData[JSONResponseKeys.createdAt] as? String{
                    
                     print("objectID is \(objectID)")
+                    user.createdAt = createdAt
                     user.updatedAt = createdAt
                     user.objectId = objectID
                     user.latitude = location.latitude

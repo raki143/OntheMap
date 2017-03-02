@@ -70,6 +70,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func postUserInformation(){
         print("post user Info")
+        if let _ = UdacityUser.sharedInstance.objectId {
+            
+            let alert = UIAlertController(title:"Alert ", message: AlertMessage.overWriteLocation, preferredStyle: .alert)
+            
+            let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (alert: UIAlertAction!) in
+                
+                self.performSegue(withIdentifier: "informationPostingVC", sender: nil)
+            })
+            
+            let cancel = UIAlertAction(title: "cancel", style: .default, handler: nil)
+            
+            alert.addAction(overwriteAction)
+            alert.addAction(cancel)
+            
+            DispatchQueue.main.async(execute: {
+                
+                self.present(alert, animated: true, completion: nil)
+            })
+            
+        }else{
+            performSegue(withIdentifier: "informationPostingVC", sender: nil)
+        }
     }
     
     @IBAction func refreshStudentLocations(){

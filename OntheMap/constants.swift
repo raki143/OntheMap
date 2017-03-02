@@ -85,3 +85,6 @@ struct JSONResponseKeys {
     static let createdAt = "createdAt"
 }
 
+struct AlertMessage{
+    static let overWriteLocation = "You Have Already Posted a Student Location. Would You Like to Overwrite Your Current Location?"
+}
