@@ -107,11 +107,19 @@ class StudentsTableViewController: UITableViewController{
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 
         let studentCell = StudentInfoModel.students[indexPath.row]
-        cell.textLabel?.text = "\(studentCell.firstName) \(studentCell.lastName)"
-        cell.detailTextLabel?.text = "\(studentCell.mediaURL)"
+        
+        if let firstName = studentCell.firstName{
+        
+            let lastName = studentCell.lastName ?? ""
+            let mediaURL = studentCell.mediaURL ?? ""
+            cell.textLabel?.text = "\(firstName) \(lastName)"
+            cell.detailTextLabel?.text = "\(mediaURL)"
+        }
+        
         cell.layer.borderColor = UIColor.black.cgColor
         cell.backgroundColor = UIColor.lightGray
         cell.layer.borderWidth = 1
