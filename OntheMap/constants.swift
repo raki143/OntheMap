@@ -15,7 +15,7 @@ struct URLString {
     static let signIn = "https://www.udacity.com/api/session"
     static let logout = "https://www.udacity.com/api/session"
     static let studentLocations = "https://parse.udacity.com/parse/classes/StudentLocation"
-    static let userInfo = "https://parse.udacity.com/parse/classes/StudentLocation"
+    static let userInfo = "https://parse.udacity.com/parse/classes/StudentLocation/"
     static let publicUserData = "https://www.udacity.com/api/users/"
 
 }

@@ -24,6 +24,7 @@ class InformationPostingViewController: UIViewController,UITextViewDelegate {
     @IBOutlet weak var submitButton: UIButton!
     
     var activityIndicator : UIActivityIndicatorView?
+    var coordinatePoint : CLPlacemark?
     
 
     override func viewDidLoad() {
@@ -72,9 +73,9 @@ class InformationPostingViewController: UIViewController,UITextViewDelegate {
             
         }
         
+        self.coordinatePoint = coordinates
         let placeMark = MKPlacemark(placemark: coordinates)
         self.locationMapView.addAnnotation(placeMark)
-        
         let region = MKCoordinateRegionMakeWithDistance((placeMark.location?.coordinate)!, 5000.0, 5000.0)
         locationMapView.setRegion(region, animated: true)
         
@@ -82,6 +83,38 @@ class InformationPostingViewController: UIViewController,UITextViewDelegate {
     
     @IBAction func submitAction(_ sender: Any) {
         
+        let mapString = locationTextView.text!
+        let latitude = (self.coordinatePoint?.location?.coordinate.latitude)!
+        let longitude = (self.coordinatePoint?.location?.coordinate.longitude)!
+        
+        let location = LocationModel(latitude: latitude, longitude: longitude, mapString: mapString)
+        let mediaURL = linkTextView.text!
+        
+        
+        if let _ = UdacityUser.sharedInstance.objectId{
+            
+            // update user location
+           UdacityUserAPI.sharedInstance().updatestudentLocationWith(location: location, withMediaURL: mediaURL, usingUdacityUserDetails: UdacityUser.sharedInstance, withHandler: { (result, error) in
+                
+                if result{
+                    self.dismiss(animated: true, completion: nil)
+                }else{
+                    self.createAlertMessage(title: "Alert", message: "Sorry, We are unable to update your location. Please try again later.")
+                }
+            })
+            
+      }else{
+            // post user location
+            
+            UdacityUserAPI.sharedInstance().postStudentLocationWith(location: location, withMediaURL: mediaURL, usingUdacityUserDetails: UdacityUser.sharedInstance, withHandler: { (result, error) in
+                
+                if result{
+                    self.dismiss(animated: true, completion: nil)
+                }else{
+                    self.createAlertMessage(title: "Alert", message: "Sorry, We are unable to Post your location. Please try again later.")
+                }
+            })
+        }
         
     }
     
