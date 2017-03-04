@@ -137,7 +137,8 @@ class UdacityUserAPI: NSObject {
                             let userDict = userInfoArray[count - 1]
                             
                                 print("userInfo is \(userDict)")
-                                let udacityUser = UdacityUser(studentDict: userDict)
+                                let udacityUser = UdacityUser.sharedInstance
+                                udacityUser.updateUdacityUserDetails(studentDict: userDict)
                                 print("shared Instance objectId is \(UdacityUser.sharedInstance.objectId)")
                                 print("objectId is \(udacityUser.objectId)")
                             

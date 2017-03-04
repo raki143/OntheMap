@@ -16,6 +16,7 @@ struct StudentInfoModel{
         
         students.removeAll()
         for student in newStudents{
+            print(student)
             let newStudent = StudentInformation(studentDict: student)
             self.students.append(newStudent)
         }

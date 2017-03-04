@@ -21,7 +21,13 @@ class UdacityUser : NSObject{
     var updatedAt: String?
     var createdAt: String?
     
-    init(studentDict : [String : AnyObject]){
+    static let sharedInstance : UdacityUser = {
+        
+        let instance = UdacityUser()
+        return instance
+    }()
+    
+    func updateUdacityUserDetails(studentDict: [String:AnyObject]) -> Void{
         
         objectId = studentDict[StudentInfoKeys.objectIdKey] as! String?
         updatedAt = studentDict[StudentInfoKeys.updatedAtKey] as! String?
@@ -34,12 +40,7 @@ class UdacityUser : NSObject{
         mediaURL = studentDict[StudentInfoKeys.mediaURLKey] as! String?
         createdAt = studentDict[StudentInfoKeys.createdAtKey] as! String?
         
+        return
     }
-    
-    static let sharedInstance : UdacityUser = {
-     
-        let instance = UdacityUser(studentDict: [:])
-        return instance
-    }()
     
 }

@@ -23,16 +23,16 @@ struct StudentInformation {
     
     init(studentDict : [String : AnyObject]){
         
-        createdAt = studentDict[StudentInfoKeys.createdAtKey] as! String?
-        objectId = studentDict[StudentInfoKeys.objectIdKey] as! String? 
-        updatedAt = studentDict[StudentInfoKeys.updatedAtKey] as! String?
-        firstName = studentDict[StudentInfoKeys.firstNameKey] as! String?
-        lastName = studentDict[StudentInfoKeys.lastNameKey] as! String? 
-        uniqueKey = studentDict[StudentInfoKeys.uniqueKeyKey] as! String?
-        latitude = studentDict[StudentInfoKeys.latitudeKey] as! Double?
-        longitude = studentDict[StudentInfoKeys.longitudeKey] as! Double?
-        mapString = studentDict[StudentInfoKeys.mapStringKey] as! String?
-        mediaURL = studentDict[StudentInfoKeys.mediaURLKey] as! String?
+        createdAt = studentDict[StudentInfoKeys.createdAtKey] as? String
+        objectId = studentDict[StudentInfoKeys.objectIdKey] as? String
+        updatedAt = studentDict[StudentInfoKeys.updatedAtKey] as? String
+        firstName = studentDict[StudentInfoKeys.firstNameKey] as? String
+        lastName = studentDict[StudentInfoKeys.lastNameKey] as? String
+        uniqueKey = studentDict[StudentInfoKeys.uniqueKeyKey] as? String
+        latitude = studentDict[StudentInfoKeys.latitudeKey] as? Double
+        longitude = studentDict[StudentInfoKeys.longitudeKey] as? Double
+        mapString = studentDict[StudentInfoKeys.mapStringKey] as? String
+        mediaURL = studentDict[StudentInfoKeys.mediaURLKey] as? String
         
         
     }
