@@ -50,12 +50,12 @@ class InformationPostingViewController: UIViewController,UITextViewDelegate {
             self.activityIndicator?.hide()
             
             if error != nil{
-                self.createAlertMessage(title: "Alert", message: "Failed to geocode the given location.Please try another address")
+                self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.failedToGeocodeLocation)
             }else if placemark!.count > 0{
                 let coordinates = placemark![0] as CLPlacemark
                 self.presentLocationOnTheMap(usingCoordinates: coordinates)
             }else{
-                self.createAlertMessage(title: "Alert", message: "No Placemarks returned for the given location.")
+                self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.errorInPlacemarks)
             }
         }
         
@@ -105,10 +105,10 @@ class InformationPostingViewController: UIViewController,UITextViewDelegate {
                     
                     switch error{
                     case onTheMapErrors.noInternetConnection:
-                        self.createAlertMessage(title: "Alert", message: "Seems like you don't have an internet connection")
+                        self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.noInternetConnection)
                         break
                     default:
-                        self.createAlertMessage(title: "Alert", message: "Sorry, We are unable to update your location. Please try again later.")
+                        self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.failedToUpdateStudentLocation)
                         break
                     }
                 }
@@ -127,10 +127,10 @@ class InformationPostingViewController: UIViewController,UITextViewDelegate {
                     
                     switch error{
                     case onTheMapErrors.noInternetConnection:
-                        self.createAlertMessage(title: "Alert", message: "Seems like you don't have an internet connection")
+                        self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.noInternetConnection)
                         break
                     default:
-                        self.createAlertMessage(title: "Alert", message: "Sorry, We are unable to post your location. Please try again later.")
+                        self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.failedToPostStudentLocation)
                         break
                     }
                     

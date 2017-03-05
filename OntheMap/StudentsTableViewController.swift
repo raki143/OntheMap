@@ -28,7 +28,7 @@ class StudentsTableViewController: UITableViewController{
            
             DispatchQueue.main.async(execute: {
                 activityIndicator.hide()
-                self.createAlertMessage(title: "Alert", message: "Unable to load students locations.please reload it.")
+                self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.failedToLoadStudentLocations)
             })
             
         }) { (result) in
@@ -57,7 +57,7 @@ class StudentsTableViewController: UITableViewController{
                     self.dismiss(animated: true, completion: nil)
                 })
             }else{
-                self.createAlertMessage(title: "Alert", message: "Error in logout. Please try again later.")
+                self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.errorInLogout)
             }
         }
 
@@ -67,14 +67,14 @@ class StudentsTableViewController: UITableViewController{
         
         if let _ = UdacityUser.sharedInstance.objectId {
             
-            let alert = UIAlertController(title:"Alert", message: AlertMessage.overWriteLocation, preferredStyle: .alert)
+            let alert = UIAlertController(title: AlertTitle.alert, message: AlertMessage.overWriteLocation, preferredStyle: .alert)
             
-            let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (alert: UIAlertAction!) in
+            let overwriteAction = UIAlertAction(title: AlertTitle.overWrite, style: .default, handler: { (alert: UIAlertAction!) in
                 
                 self.performSegue(withIdentifier: "informationPostingVC", sender: nil)
             })
             
-            let cancel = UIAlertAction(title: "cancel", style: .default, handler: nil)
+            let cancel = UIAlertAction(title: AlertTitle.cancel, style: .default, handler: nil)
                 
             alert.addAction(overwriteAction)
             alert.addAction(cancel)
