@@ -302,7 +302,13 @@ class UdacityUserAPI: NSObject {
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
             guard (error == nil) else{
-                responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
+               
+                let errorOccured = error as? NSError
+                if errorOccured?.code == NSURLErrorNotConnectedToInternet{
+                    responseClosure(false, onTheMapErrors.noInternetConnection)
+                }else{
+                    responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
+                }
                 return
             }
             
@@ -325,10 +331,9 @@ class UdacityUserAPI: NSObject {
                     user.mapString = location.mapString
                     user.mediaURL = mediaURL
                     responseClosure(true,onTheMapErrors.noError)
+                }else{
+                    responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
                 }
-                
-                responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
-                
             }catch{
                 responseClosure(false,onTheMapErrors.errorInUpdateStudentLocation)
                 return
@@ -366,7 +371,13 @@ class UdacityUserAPI: NSObject {
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
             guard (error == nil) else{
-                responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
+               
+                let errorOccured = error as? NSError
+                if errorOccured?.code == NSURLErrorNotConnectedToInternet{
+                    responseClosure(false, onTheMapErrors.noInternetConnection)
+                }else{
+                    responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
+                }
                 return
             }
             
@@ -393,12 +404,8 @@ class UdacityUserAPI: NSObject {
                     user.mediaURL = mediaURL
                     responseClosure(true,onTheMapErrors.noError)
                 }else{
-                    
-                    responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
+                       responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
                 }
-                
-                
-                
             }catch{
                 responseClosure(false,onTheMapErrors.errorInPostingStudentLocation)
                 return

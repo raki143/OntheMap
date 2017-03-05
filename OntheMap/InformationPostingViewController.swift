@@ -83,6 +83,7 @@ class InformationPostingViewController: UIViewController,UITextViewDelegate {
     
     @IBAction func submitAction(_ sender: Any) {
         
+        let activityIndicator = showActivityIndicator()
         let mapString = locationTextView.text!
         let latitude = (self.coordinatePoint?.location?.coordinate.latitude)!
         let longitude = (self.coordinatePoint?.location?.coordinate.longitude)!
@@ -95,11 +96,21 @@ class InformationPostingViewController: UIViewController,UITextViewDelegate {
             
             // update user location
            UdacityUserAPI.sharedInstance().updatestudentLocationWith(location: location, withMediaURL: mediaURL, usingUdacityUserDetails: UdacityUser.sharedInstance, withHandler: { (result, error) in
-                
+            
+            activityIndicator.hide()
+            
                 if result{
                     self.dismiss(animated: true, completion: nil)
                 }else{
-                    self.createAlertMessage(title: "Alert", message: "Sorry, We are unable to update your location. Please try again later.")
+                    
+                    switch error{
+                    case onTheMapErrors.noInternetConnection:
+                        self.createAlertMessage(title: "Alert", message: "Seems like you don't have an internet connection")
+                        break
+                    default:
+                        self.createAlertMessage(title: "Alert", message: "Sorry, We are unable to update your location. Please try again later.")
+                        break
+                    }
                 }
             })
             
@@ -108,10 +119,21 @@ class InformationPostingViewController: UIViewController,UITextViewDelegate {
             
             UdacityUserAPI.sharedInstance().postStudentLocationWith(location: location, withMediaURL: mediaURL, usingUdacityUserDetails: UdacityUser.sharedInstance, withHandler: { (result, error) in
                 
+                activityIndicator.hide()
+                
                 if result{
                     self.dismiss(animated: true, completion: nil)
                 }else{
-                    self.createAlertMessage(title: "Alert", message: "Sorry, We are unable to Post your location. Please try again later.")
+                    
+                    switch error{
+                    case onTheMapErrors.noInternetConnection:
+                        self.createAlertMessage(title: "Alert", message: "Seems like you don't have an internet connection")
+                        break
+                    default:
+                        self.createAlertMessage(title: "Alert", message: "Sorry, We are unable to post your location. Please try again later.")
+                        break
+                    }
+                    
                 }
             })
         }
