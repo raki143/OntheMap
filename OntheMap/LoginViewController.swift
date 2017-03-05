@@ -18,12 +18,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        subscribeToKeyBoardNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        subscribeToKeyBoardNotificatin()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
-    func subscribeToKeyBoardNotificatin(){
+    func subscribeToKeyBoardNotification(){
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -85,7 +85,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         }
         
         if email.isEmpty || password.isEmpty{
-            self.createAlertMessage(title: "Alert", message: "Please enter valid credentials.")
+            self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.enterValidCredentilas)
             return
         }
         let activityIndicator = showActivityIndicator()
@@ -97,7 +97,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 if response.statusCode < 200 || response.statusCode > 300{
                     
                     activityIndicator.hide()
-                    self.createAlertMessage(title: "Alert", message: "Incorrect Username or Password. Please enter correct credentials.")
+                    self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.invalidCredentials)
                     return
                 }
             }
@@ -107,10 +107,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 activityIndicator.hide()
 
                 if error.code == NSURLErrorNotConnectedToInternet{
-                    self.createAlertMessage(title: "Alert", message: "Seems like you don't have an internet connection")
+                    self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.noInternetConnection)
                     return
                 }else{
-                    self.createAlertMessage(title: "Alert", message: "sorry we are unable to serve your request.Please try again.")
+                    self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.failedRequest)
                 }
                 
             }else{
@@ -138,7 +138,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                             }else{
                                
                                 // failure to fetch user information.
-                                self.createAlertMessage(title: "Alert", message: "sorry we are unable to fetch user details.Please try again.")
+                                self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.failedToFetchUserDetails)
                             }
                         }
                         
@@ -147,14 +147,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                     }else{
                         
                         activityIndicator.hide()
-                        self.createAlertMessage(title: "Alert", message: "Incorrect Username or Password. Please enter correct credentials.")
+                        self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.invalidCredentials)
                         return
                         
                     }
                 }catch{
                     
                     activityIndicator.hide()
-                    self.createAlertMessage(title: "Alert", message: "sorry we are unable to serve your request.Please try again.")
+                    self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.failedRequest)
                     
                 }
                 

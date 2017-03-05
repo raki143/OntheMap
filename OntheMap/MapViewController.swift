@@ -28,10 +28,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             DispatchQueue.main.async(execute: {
                 activityIndicator.hide()
-                 self.createAlertMessage(title: "Alert", message: "Unable to load students locations.please reload it.")
+                 self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.failedToLoadStudentLocations)
             })
            
             }) { (result) in
+                
                 print("successfully loaded other student locations")
                 DispatchQueue.main.async(execute: {
                     activityIndicator.hide()
@@ -55,23 +56,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     self.dismiss(animated: true, completion: nil)
                 })
             }else{
-                self.createAlertMessage(title: "Alert", message: "Error in logout. Please try again later.")
+                self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.errorInLogout)
             }
         }
     }
     
     @IBAction func postUserInformation(){
-        print("post user Info")
+        
+        
         if let _ = UdacityUser.sharedInstance.objectId {
             
-            let alert = UIAlertController(title:"Alert ", message: AlertMessage.overWriteLocation, preferredStyle: .alert)
+            let alert = UIAlertController(title: AlertTitle.alert, message: AlertMessage.overWriteLocation, preferredStyle: .alert)
             
-            let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (alert: UIAlertAction!) in
+            let overwriteAction = UIAlertAction(title: AlertTitle.overWrite, style: .default, handler: { (alert: UIAlertAction!) in
                 
                 self.performSegue(withIdentifier: "informationPostingVC", sender: nil)
             })
             
-            let cancel = UIAlertAction(title: "cancel", style: .default, handler: nil)
+            let cancel = UIAlertAction(title: AlertTitle.cancel, style: .default, handler: nil)
             
             alert.addAction(overwriteAction)
             alert.addAction(cancel)
@@ -179,7 +181,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         
             guard let availableURL = view.annotation?.subtitle, let url = URL(string: availableURL!) , UIApplication.shared.openURL(url) == true else{
                 
-                self.createAlertMessage(title: "Invalid URL", message: "Unable to open provided link.")
+                self.createAlertMessage(title: AlertTitle.invalidURL, message: AlertMessage.invalidURL)
                 return
             }
 

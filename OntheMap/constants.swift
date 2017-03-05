@@ -35,6 +35,7 @@ struct Keys{
     static let APIKey = "X-Parse-REST-API-Key"
     static let contentType = "Content-Type"
     static let accept = "Accept"
+    static let XSRFToken = "X-XSRF-TOKEN"
 }
 
 struct StudentInfoKeys{
@@ -86,5 +87,30 @@ struct JSONResponseKeys {
 }
 
 struct AlertMessage{
+    
     static let overWriteLocation = "You Have Already Posted a Student Location. Would You Like to Overwrite Your Current Location?"
+    static let enterValidCredentilas = "Please enter valid credentials."
+    static let invalidCredentials = "Incorrect Username or Password. Please enter correct credentials."
+    static let noInternetConnection = "Seems like you don't have an internet connection"
+    static let failedRequest = "sorry we are unable to serve your request.Please try again."
+    static let failedToFetchUserDetails = "sorry we are unable to fetch user details.Please try again."
+    static let failedToLoadStudentLocations = "Sorry, we are unable to load students locations. please reload it."
+    static let errorInLogout = "Error in logout. Please try again later."
+    static let invalidURL = "Unable to open provided link."
 }
+
+
+struct AlertTitle{
+    
+    static let alert = "Alert"
+    static let overWrite = "Overwrite"
+    static let cancel = "Cancel"
+    static let invalidURL = "Invalid URL"
+    
+}
+
+
+
+
+
+

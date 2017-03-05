@@ -32,6 +32,7 @@ class StudentsTableViewController: UITableViewController{
             })
             
         }) { (result) in
+            
             print("successfully loaded other student locations")
             DispatchQueue.main.async(execute: {
                 activityIndicator.hide()
@@ -66,7 +67,7 @@ class StudentsTableViewController: UITableViewController{
         
         if let _ = UdacityUser.sharedInstance.objectId {
             
-            let alert = UIAlertController(title:"Alert ", message: AlertMessage.overWriteLocation, preferredStyle: .alert)
+            let alert = UIAlertController(title:"Alert", message: AlertMessage.overWriteLocation, preferredStyle: .alert)
             
             let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (alert: UIAlertAction!) in
                 
@@ -132,7 +133,7 @@ class StudentsTableViewController: UITableViewController{
         
         guard let availableURL = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text, let url = URL(string: availableURL) , UIApplication.shared.openURL(url) == true else{
             
-            self.createAlertMessage(title: "Invalid URL", message: "Unable to open provided link.")
+            self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.invalidURL)
             return
         }
     }

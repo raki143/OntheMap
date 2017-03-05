@@ -27,8 +27,8 @@ class UdacityUserAPI: NSObject {
         
         let request = NSMutableURLRequest(url: URL(string: URLString.signIn)!)
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(Values.contentType, forHTTPHeaderField: Keys.accept)
+        request.addValue(Values.contentType, forHTTPHeaderField: Keys.contentType )
         request.httpBody = "{\"udacity\": {\"username\": \"\(userName)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
@@ -65,7 +65,7 @@ class UdacityUserAPI: NSObject {
             if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
         }
         if let xsrfCookie = xsrfCookie {
-            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: Keys.XSRFToken)
         }
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
