@@ -21,6 +21,7 @@ This app has multiple view controllers:
 - __InformationPostingViewController__: - This view controller will let user to post their location in the textfield and post weblink. If user tap on cancel button, current view controller resigns and table view controller will pop up. 
 
 - Application uses MapKit, UIKit, Udacity authentication.
+ 
 
 ### Requirements
 
