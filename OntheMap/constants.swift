@@ -104,7 +104,7 @@ struct AlertMessage{
     static let errorInPlacemarks = "No Placemarks returned for the given location.Please provide correct location."
 }
 
-
+// Alert title
 struct AlertTitle{
     
     static let alert = "Alert"
