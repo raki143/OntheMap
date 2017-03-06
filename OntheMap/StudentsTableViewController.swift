@@ -131,6 +131,7 @@ class StudentsTableViewController: UITableViewController{
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.deselectRow(at: indexPath, animated: true)
         guard let availableURL = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text, let url = URL(string: availableURL) , UIApplication.shared.openURL(url) == true else{
             
             self.createAlertMessage(title: AlertTitle.alert, message: AlertMessage.invalidURL)

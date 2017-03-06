@@ -11,7 +11,7 @@ import Foundation
 typealias RequestCompletionHandler = (_ data: Data?, _ response: URLResponse?, _ error: NSError?) -> Void
 
 
-class UdacityUserAPI: NSObject {
+final class UdacityUserAPI: NSObject {
     
     // shared session
     var session = URLSession.shared
